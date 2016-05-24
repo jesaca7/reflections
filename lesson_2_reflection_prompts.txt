@@ -1,0 +1,80 @@
+﻿COMENTARIOS EN EL COMMIT GUIA http://udacity.github.io/git-styleguide/
+
+
+What happens when you initialize a repository? Why do you need to do it? It creates a new folder .git      git init
+
+
+
+How is the staging area different from the working directory and the repository? git add name.txt
+What value do you think it offers? we can include in the stage area the file or files that we want
+
+
+
+How can you use the staging area to make sure you have one commit per logical
+change?    para comparar working directory con staging area uso git diff sin argumentos
+			para comparar el staging area con el repository uso git diff --staged
+			get reset --hard Discards any changes in either the working directory or the staging area
+
+
+
+What are some situations when branches would be helpful in keeping your history
+
+organized? How would branches help?
+	git branch      muestra los branch que hay
+	git branch noveah  crea un branch que se llama noveah
+	git checkout noveah    pone la HEAD sobre este branch
+
+	Con los branch puedo crear un punto de partida para realizar modificaciones en el codigo y ver si todo va bien sin tener que preocuparme.
+	Luego puedo unir varios branch en uno solo y asi hacer un commit como mas oficial y los branch son como mas para trastear
+
+
+
+How do the diagrams help you visualize the branch structure?
+	Pues con los diagramas puedes ver donde se situan los branch y en que rama se encuentran. Asi evitamos obtener el estado de cabeza a la mierda
+	y tb nos informa de hasta que punto un cambia afecta a nuestros branch y otros commit
+
+
+What is the result of merging two branches together? Why do we represent it in the diagram the way we do?
+	git merge will also include the currently checked-out branch in the merged version. So if you have branch1 checked out, and you run git merge branch2 branch3, the merged version will combine branch1 as well as branch2 and branch3. That's because the branch1 label will upadte after you make the merge commit.
+	git checkout branch1 and then type git merge branch2 its the same than git merge branch1 branch2. 
+	git merge always merges all the specified branches into the currently checked out branch creating a new commit for that branch.
+	Also, since the two branches are merged, the order in which they are typed into the command line does not matter. The key is to remember that git merge always merges all the specified branches into the currently checked out branch, creating a new commit for that branch.
+
+What are the pros and cons of Git’s automatic merging vs. always doing merges manually?
+
+Auto-merging game.js
+CONFLICT (content): Merge conflict in game.js
+Automatic merge failed; fix conflicts and then commit the result.
+
+
+then your files were not in the same state as Caroline's when you started the merge. To fix this, complete the following steps:
+
+-Restore your files to their state before you started the merge by 	running git merge --abort
+-Double check the state of your files. If you run git log while the master branch is checked out, you should see Caroline's "Add color" commit as the second-most-recent, and the most recent should be your commit fixing the bullet bug. If you use git diff to compare your commit to Caroline's, your commit should introduce the line this.delayBeforeBullet = 10; on line 424. The line should be indented to the same level as the line below it using only spaces (no tabs), and the line should have no spaces after it.
+-Once your file is in the correct state, create a new commit with your changes.
+-Try the merge again.
+
+Merge conflict (Newline characters between Windows and Unix systems)
+Context: Whenever we hit the "Enter" key on the keyboard, we are actually telling the computer to insert an invisible character into our text file to indicate to the computer that there should be a new line. Unix systems adds one character called the "line feed" character or LF or \n while Windows systems adds two characters, "carriage return" and "line feed" or CRLF or \r\n.
+Caroline's files have LF because her files were edited on Mac OSX, which uses LF. If a Windows user were to edit Caroline's files, the Windows text editor might convert all LF to CRLF to make editing files possible. When the Windows user merges her file with Caroline's files, a merge conflict will result due to the different LF and CRLF characters.
+To fix this, Windows users should set the global autocrlf attribute to true: git config --global core.autocrlf true. More information can be found here: https://help.github.com/articles/dealing-with-line-endings/#platform-all
+Comparing a commit to its parent
+The command Caroline mentions to compare a commit to its parent is git show commit_id
+
+Reflect: Merging Two Branches
+Now that you’ve learned how to use Git to merge branches together, go add the following question and your thoughts on it to your reflections file:
+What is the result of merging two branches together? Why do we represent it in the diagram the way we do?
+You may also want to commit your changes to the file. When you're ready to move on, click "Next" and Sarah will explain why this automatic merge process won't always be possible and what happens instead.
+
+
+Diagramming Tools:
+gliffy
+yUML
+If you have a favorite that we don't have listed here, mention it in a forum post so that others can find it!
+
+En la imagen en la carpeta se ve como cuando ambos branch cambian la 
+misma zona del fichero, que el git no puede hacer el merge y da un mensaje. Si vamos al archivo que nos dice el git al hacer el merge
+podremos ver en el unas zonas con ,<<<<<<, >>>>>, que nos indican que parte de codigo estaran en cada uno de los branch.
+
+
+Salvar a mas mejor dice un programador profesional, y la verdad es q si, q no hay necesidad de aplazarlo, se hace un commit y fuera
